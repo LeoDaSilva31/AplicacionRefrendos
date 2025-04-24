@@ -1,0 +1,51 @@
+{% extends 'refrendos/baseRefrendo.html' %}
+
+{% block refrendo_content %}
+<h2>Listado de Refrendos</h2>
+
+<form method="get" action="{% url 'refrendos:refrendo-search' %}" class="mb-3">
+    <input type="text" name="q" class="form-control" placeholder="Buscar por nombre completo..." value="{{ query|default_if_none:'' }}">
+</form>
+
+<a href="{% url 'refrendos:refrendo-add' %}" class="btn btn-success mb-3">Nuevo Refrendo</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre completo</th>
+            <th>DNI</th>
+            <th>N° Refrendo</th>
+            <th>Tipo</th>
+            <th>Expedición</th>
+            <th>Vencimiento</th>
+            <th>Salida</th>
+            <th>Días Corridos</th>
+            <th>Días Hábiles</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in refrendos %}
+        <tr>
+            <td>{{ r.nombre_completo }}</td>
+            <td>{{ r.dni }}</td>
+            <td>{{ r.numero_refrendo }}</td>
+            <td>{{ r.get_tipo_display }}</td>
+            <td>{{ r.fecha_expedicion }}</td>
+            <td>{{ r.fecha_vencimiento }}</td>
+            <td>{{ r.fecha_salida|default:"—" }}</td>
+            <td>{{ r.dias_corridos|default:"—" }}</td>
+            <td>{{ r.dias_habiles|default:"—" }}</td>
+            <td>
+                <a href="{% url 'refrendos:refrendo-detail' r.id %}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{% url 'refrendos:refrendo-edit' r.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'refrendos:refrendo-delete' r.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="10">No se encontraron refrendos.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

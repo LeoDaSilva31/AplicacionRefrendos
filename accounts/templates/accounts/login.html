@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; animation: fadeIn 1s;">
+        <h2 class="text-center mb-4">Iniciar sesión</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="{{ form.username.id_for_label }}" class="form-label">{{ form.username.label }}</label>
+                {% if form.username.errors %}
+                    {{ form.username|add_class:"form-control is-invalid"|attr:"placeholder:Nombre de usuario" }}
+                    {% for error in form.username.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                {% else %}
+                    {{ form.username|add_class:"form-control"|attr:"placeholder:Nombre de usuario" }}
+                {% endif %}
+            </div>
+
+            <div class="mb-3">
+                <label for="{{ form.password.id_for_label }}" class="form-label">{{ form.password.label }}</label>
+                {% if form.password.errors %}
+                    {{ form.password|add_class:"form-control is-invalid"|attr:"placeholder:Contraseña" }}
+                    {% for error in form.password.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                {% else %}
+                    {{ form.password|add_class:"form-control"|attr:"placeholder:Contraseña" }}
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 mt-3">Iniciar sesión</button>
+        </form>
+    </div>
+</div>
+
+<style>
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+{% endblock %}

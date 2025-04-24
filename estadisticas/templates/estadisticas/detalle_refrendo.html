@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalles de Refrendos{% endblock %}
+
+{% block content %}
+    <h1>Detalles de los Refrendos - {{ nombre }} ({{ tipo }})</h1>
+    
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <th>DNI</th>
+                <th>Número de Refrendo</th>
+                <th>Fecha de Vencimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for refrendo in refrendos %}
+            <tr>
+                <td>{{ refrendo.nombre_completo }}</td>
+                <td>{{ refrendo.dni }}</td>
+                <td>{{ refrendo.numero_refrendo }}</td>
+                <td>{{ refrendo.fecha_vencimiento }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'refrendos/baseRefrendo.html' %}
+
+{% block refrendo_content %}
+<h2>Detalles del Refrendo</h2>
+
+<ul class="list-group mb-3">
+    <li class="list-group-item"><strong>Nombre completo:</strong> {{ refrendo.nombre_completo }}</li>
+    <li class="list-group-item"><strong>DNI:</strong> {{ refrendo.dni }}</li>
+    <li class="list-group-item"><strong>Número de refrendo:</strong> {{ refrendo.numero_refrendo }}</li>
+    <li class="list-group-item"><strong>Tipo:</strong> {{ refrendo.get_tipo_display }}</li>
+    <li class="list-group-item"><strong>Título:</strong> {{ refrendo.titulo }}</li>
+    <li class="list-group-item"><strong>Curso:</strong> {{ refrendo.curso }}</li>
+    <li class="list-group-item"><strong>Expedido en:</strong> {{ refrendo.fecha_expedicion }}</li>
+    <li class="list-group-item"><strong>Vencimiento:</strong> {{ refrendo.fecha_vencimiento }}</li>
+    <li class="list-group-item"><strong>Cargado por:</strong> {{ refrendo.creado_por }}</li>
+    <li class="list-group-item"><strong>Fecha de salida:</strong> {{ refrendo.fecha_salida }}</li>  <!-- Aquí se muestra la fecha de salida -->
+    <li class="list-group-item"><strong>Días corridos:</strong> {{ refrendo.dias_corridos }}</li>  <!-- Días corridos -->
+    <li class="list-group-item"><strong>Días hábiles:</strong> {{ refrendo.dias_habiles }}</li>  <!-- Días hábiles -->
+    {% if refrendo.archivo_pdf %}
+    <li class="list-group-item"><strong>PDF:</strong> <a href="{{ refrendo.archivo_pdf.url }}" target="_blank">Descargar</a></li>
+    {% endif %}
+    {% if refrendo.imagen %}
+    <li class="list-group-item"><strong>Imagen:</strong><br><img src="{{ refrendo.imagen.url }}" alt="Imagen" style="max-width: 300px;"></li>
+    {% endif %}
+</ul>
+
+<a href="{% url 'refrendos:refrendo-edit' refrendo.id %}" class="btn btn-warning">Editar</a>
+<a href="{% url 'refrendos:refrendo-list' %}" class="btn btn-secondary">Volver</a>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}Crear Usuario{% endblock %}
+
+{% block content %}
+<h2>Crear Usuario</h2>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+        {{ form.username }}
+        {% if form.username.help_text %}
+            <small class="form-text text-muted">{{ form.username.help_text }}</small>
+        {% endif %}
+        {% for error in form.username.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+    
+    <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+        {{ form.email }}
+        {% if form.email.help_text %}
+            <small class="form-text text-muted">{{ form.email.help_text }}</small>
+        {% endif %}
+        {% for error in form.email.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+        {{ form.password1 }}
+        {% if form.password1.help_text %}
+            <small class="form-text text-muted">{{ form.password1.help_text }}</small>
+        {% endif %}
+        {% for error in form.password1.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+        {{ form.password2 }}
+        {% if form.password2.help_text %}
+            <small class="form-text text-muted">{{ form.password2.help_text }}</small>
+        {% endif %}
+        {% for error in form.password2.errors %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Usuario</button>
+    <a href="{% url 'user-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

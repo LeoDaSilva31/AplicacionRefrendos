@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h2 class="mb-3">Bienvenido a la aplicación</h2>
+        <p class="text-muted">Esta es la página principal luego de iniciar sesión.</p>
+    </div>
+    <div>
+        <a href="{% url 'refrendos:refrendo-list' %}" class="btn btn-primary">Ver Refrendos</a>
+        <a href="{% url 'refrendos:refrendo-add' %}" class="btn btn-success">Cargar Refrendo</a>
+        <a href="{% url 'estadisticas_view' %}" class="btn btn-info">Estadísticas</a>
+    </div>
+{% endblock %}

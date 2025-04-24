@@ -1,0 +1,13 @@
+{% extends 'refrendos/baseRefrendo.html' %}
+
+{% block refrendo_content %}
+<h2>Eliminar Refrendo</h2>
+
+<p>¿Estás seguro de que querés eliminar el refrendo de <strong>{{ refrendo.nombre_completo }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="{% url 'refrendos:refrendo-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

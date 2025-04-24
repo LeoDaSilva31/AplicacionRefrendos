@@ -1,0 +1,74 @@
+{% extends 'refrendos/baseRefrendo.html' %}
+
+{% block refrendo_content %}
+<h2>{{ form.instance.pk|yesno:"Editar Refrendo,Nuevo Refrendo" }}</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!-- Nombre completo, DNI, etc. -->
+    <div class="form-group">
+        <label for="id_nombre_completo">Nombre completo:</label>
+        {{ form.nombre_completo }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_dni">DNI:</label>
+        {{ form.dni }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_numero_refrendo">Número de refrendo:</label>
+        {{ form.numero_refrendo }}
+    </div>
+
+    <!-- Fechas: Mostrar las fechas en formato compatible con 'date' -->
+    <div class="form-group">
+        <label for="id_fecha_vencimiento">Fecha de vencimiento:</label>
+        <input type="date" name="fecha_vencimiento" id="id_fecha_vencimiento" class="form-control" 
+               value="{{ form.fecha_vencimiento.value|date:'Y-m-d' }}">
+    </div>
+
+    <div class="form-group">
+        <label for="id_fecha_expedicion">Fecha de expedición:</label>
+        <input type="date" name="fecha_expedicion" id="id_fecha_expedicion" class="form-control" 
+               value="{{ form.fecha_expedicion.value|date:'Y-m-d' }}">
+    </div>
+
+    <div class="form-group">
+        <label for="id_fecha_salida">Fecha de salida:</label>
+        <input type="date" name="fecha_salida" id="id_fecha_salida" class="form-control" 
+               value="{{ form.fecha_salida.value|date:'Y-m-d' }}">
+    </div>
+
+    <!-- Resto de los campos -->
+    <div class="form-group">
+        <label for="id_tipo">Tipo:</label>
+        {{ form.tipo }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_titulo">Título:</label>
+        {{ form.titulo }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_curso">Curso:</label>
+        {{ form.curso }}
+    </div>
+
+    <!-- Archivos -->
+    <div class="form-group">
+        <label for="id_archivo_pdf">Archivo PDF:</label>
+        {{ form.archivo_pdf }}
+    </div>
+
+    <div class="form-group">
+        <label for="id_imagen">Imagen:</label>
+        {{ form.imagen }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a href="{% url 'refrendos:refrendo-list' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}
